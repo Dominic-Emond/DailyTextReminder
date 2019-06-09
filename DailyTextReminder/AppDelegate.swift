@@ -6,6 +6,7 @@
 //  Copyright © 2019 Flamango. All rights reserved.
 //
 
+import CoreData
 import UIKit
 import UserNotifications
 
@@ -38,6 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        //Remove the notification badge
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

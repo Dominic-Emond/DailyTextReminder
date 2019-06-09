@@ -6,13 +6,14 @@
 //  Copyright © 2019 Flamango. All rights reserved.
 //
 
+import CoreData
 import UIKit
 import MessageUI
 
 public let gradient = CAGradientLayer()
 
 //First App -> No MVC architecture
-class ViewController: UIViewController, CAAnimationDelegate, MFMessageComposeViewControllerDelegate {
+class ViewController: UIViewController, CAAnimationDelegate, MFMessageComposeViewControllerDelegate, UITextViewDelegate {
 
     @IBOutlet weak var textView: UITextView! //Text to send
     @IBOutlet weak var timeToAlert: UIDatePicker! //Time to send text
@@ -29,6 +30,17 @@ class ViewController: UIViewController, CAAnimationDelegate, MFMessageComposeVie
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        textView.delegate = self
+        let message = UserDefaults.standard.object(forKey: "message")
+        
+        if message != nil {
+            textView.text = message as? String
+        }
+        
+        //Removes the keyboard when clicking away.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tap)
+        
         createGradientBackGround()
     }
 
@@ -51,20 +63,6 @@ class ViewController: UIViewController, CAAnimationDelegate, MFMessageComposeVie
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         //restart animation by changing the color set.
-        
-        //Debugging
-        /*
-        if flag {
-            textView.text += " +1"
-        } else {
-            textView.text += " +2"
-        }
-        
-        let alert = UIAlertController(title: "My Alert", message: "No Flag", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")}))
-        
-        self.present(alert, animated: true, completion: nil) */
         
         if flag {
             gradient.colors = gradientSet[currentGradient]
@@ -122,6 +120,12 @@ class ViewController: UIViewController, CAAnimationDelegate, MFMessageComposeVie
         self.view.layer.insertSublayer(gradient, at: 0)
         self.view.layer.insertSublayer(grayGradient, at: 1)
         animateGradient()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+        //Save the text in a struct. (Too small for learning coreData..)
+        UserDefaults.standard.set(textView.text, forKey: "message")
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
