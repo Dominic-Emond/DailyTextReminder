@@ -17,6 +17,10 @@ class ViewController: UIViewController, CAAnimationDelegate, MFMessageComposeVie
 
     @IBOutlet weak var textView: UITextView! //Text to send
     @IBOutlet weak var timeToAlert: UIDatePicker! //Time to send text
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var imessageSwitch: UISwitch!
+    @IBOutlet weak var setTimeButton: UIButton!
+    @IBOutlet weak var sendTextButton: UIButton!
     
     //Background variables
     //let gradient = CAGradientLayer()
@@ -27,8 +31,26 @@ class ViewController: UIViewController, CAAnimationDelegate, MFMessageComposeVie
     let colorTwo = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1).cgColor
     let colorThree = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1).cgColor
     
+    var receiver = Receiver()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Adding the receiver here for security reasons
+        receiver.name = "Write Name Here"
+        receiver.imessageNumber = "imessage Number"
+        receiver.smsNumber = "sms Number"
+        
+        nameLabel.text = receiver.name
+        
+        //Add the rounded square around both buttons
+        setTimeButton.layer.cornerRadius = 15
+        setTimeButton.clipsToBounds = true
+        sendTextButton.layer.cornerRadius = 15
+        sendTextButton.clipsToBounds = true
+        
+        //Change the datePicker text color
+        timeToAlert.setValue(UIColor.white, forKeyPath: "textColor")
+        
         // Do any additional setup after loading the view.
         textView.delegate = self
         let message = UserDefaults.standard.object(forKey: "message")
@@ -55,7 +77,7 @@ class ViewController: UIViewController, CAAnimationDelegate, MFMessageComposeVie
         let composeText = MFMessageComposeViewController()
         composeText.messageComposeDelegate = self
         
-        composeText.recipients = ["Add Phone Number"]
+        composeText.recipients = imessageSwitch.isOn ? [receiver.imessageNumber] : [receiver.smsNumber]
         composeText.body = textView.text
         
         self.present(composeText, animated: true, completion: nil)
@@ -103,6 +125,7 @@ class ViewController: UIViewController, CAAnimationDelegate, MFMessageComposeVie
         gradient.drawsAsynchronously = true
         
         //Makes the button more visible
+        /*
         let grayGradient = CAGradientLayer()
         let colorGray = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 0.496281036).cgColor
         let colorTransparent = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 0).cgColor
@@ -117,8 +140,9 @@ class ViewController: UIViewController, CAAnimationDelegate, MFMessageComposeVie
         grayGradient.endPoint = CGPoint(x:0.5, y: 1)
         grayGradient.drawsAsynchronously = true
         
-        self.view.layer.insertSublayer(gradient, at: 0)
         self.view.layer.insertSublayer(grayGradient, at: 1)
+         */
+        self.view.layer.insertSublayer(gradient, at: 0)
         animateGradient()
     }
     

@@ -13,6 +13,7 @@
 		B61A5A0922A62B9D0010199A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B61A5A0822A62B9D0010199A /* Assets.xcassets */; };
 		B61A5A0C22A62B9D0010199A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B61A5A0A22A62B9D0010199A /* LaunchScreen.storyboard */; };
 		B61A5A1722A9B62D0010199A /* Notification Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61A5A1622A9B62D0010199A /* Notification Delegate.swift */; };
+		B67C2E1222EE333500A915E8 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67C2E1122EE333500A915E8 /* Receiver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		B61A5A0B22A62B9D0010199A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B61A5A0D22A62B9D0010199A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B61A5A1622A9B62D0010199A /* Notification Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification Delegate.swift"; sourceTree = "<group>"; };
+		B67C2E1122EE333500A915E8 /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		B61A5A0022A62B9C0010199A /* DailyTextReminder */ = {
 			isa = PBXGroup;
 			children = (
+				B67C2E1022EE330300A915E8 /* Model */,
 				B61A5A0122A62B9C0010199A /* AppDelegate.swift */,
 				B61A5A0322A62B9C0010199A /* ViewController.swift */,
 				B61A5A0522A62B9C0010199A /* Main.storyboard */,
@@ -65,6 +68,14 @@
 				B61A5A1622A9B62D0010199A /* Notification Delegate.swift */,
 			);
 			path = DailyTextReminder;
+			sourceTree = "<group>";
+		};
+		B67C2E1022EE330300A915E8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B67C2E1122EE333500A915E8 /* Receiver.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,6 +156,7 @@
 			files = (
 				B61A5A0422A62B9C0010199A /* ViewController.swift in Sources */,
 				B61A5A0222A62B9C0010199A /* AppDelegate.swift in Sources */,
+				B67C2E1222EE333500A915E8 /* Receiver.swift in Sources */,
 				B61A5A1722A9B62D0010199A /* Notification Delegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
